@@ -16,38 +16,43 @@ class WeatherApp(QWidget):
         self.setStyleSheet("background-color: white;")
         self.recent_searches = []
 
-        
+        # Screen dimensions
         screen_geometry = QApplication.primaryScreen().availableGeometry()
         screen_width = screen_geometry.width()
         screen_height = screen_geometry.height()
 
-        
+        # Overlay size and position
         overlay_width = 800
         overlay_height = 500
         overlay_x = (screen_width - overlay_width) // 2
         overlay_y = (screen_height - overlay_height) // 2
 
-        
+        # Background image
         bg_label = QLabel(self)
-        pixmap = QPixmap("/Users/momeenaazhar/Desktop/weather app project/images for the project/weather_background.JPG")
+        pixmap = QPixmap("/Users/momeenaazhar/Desktop/Weather Forecast App/images for the project/weather_background.jpg")
+        if pixmap.isNull():
+            print("⚠️ Failed to load background image. Check the file path.")
         bg_label.setPixmap(pixmap)
         bg_label.setScaledContents(True)
         bg_label.setGeometry(0, 0, screen_width, screen_height)
 
-        
+        # Overlay widget
         self.overlay = QWidget(self)
-        self.overlay.setStyleSheet("background-color: rgba(255, 255, 255, 160); border-radius: 20px;")
+        self.overlay.setStyleSheet("""
+            background-color: rgba(255, 255, 255, 180);
+            border-radius: 20px;
+        """)
         self.overlay.setGeometry(overlay_x, overlay_y, overlay_width, overlay_height)
 
-        
+        # Layouts
         layout = QVBoxLayout()
 
-        
+        # Title
         self.title_label = QLabel("<h1><b>WEATHER FORECAST APP</b></h1>")
         self.title_label.setAlignment(Qt.AlignCenter)
         layout.addWidget(self.title_label)
 
-        
+        # Search bar
         input_layout = QHBoxLayout()
         self.city_input = QLineEdit()
         self.city_input.setPlaceholderText("Enter city name")
@@ -60,14 +65,14 @@ class WeatherApp(QWidget):
         input_layout.addWidget(self.search_button)
         layout.addLayout(input_layout)
 
-       
+        # Weather result
         self.result_label = QLabel("")
         self.result_label.setAlignment(Qt.AlignCenter)
         self.result_label.setWordWrap(True)
         self.result_label.setFont(QFont("Arial", 14))
         layout.addWidget(self.result_label)
 
-        
+        # Recent searches
         self.recent_label = QLabel("<b>Recent Searches:</b>")
         self.recent_label.setFont(QFont("Arial", 12))
         layout.addWidget(self.recent_label)
@@ -112,12 +117,12 @@ class WeatherApp(QWidget):
             else:
                 self.result_label.setText("<b>City not found. Please try again.</b>")
 
-        except:
+        except Exception as e:
             self.result_label.setText("<b>Error retrieving data. Check your connection.</b>")
-
+            print("Error:", e)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = WeatherApp()
-    window.showFullScreen()  
+    window.showFullScreen()
     sys.exit(app.exec_())
