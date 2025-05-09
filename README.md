@@ -27,6 +27,11 @@ Make sure you have the following installed:
 - **PyQt5**
 - **Requests**
 
+📸 Screenshots
+
+Here’s how the Weather Forecast App looks in action:
+<img width="1510" alt="Screenshot2" src="https://github.com/user-attachments/assets/9bf34023-7efb-4e0d-8b28-738420084334" />
+
 ### 📦 Install Required Packages
 
 ```bash
@@ -70,11 +75,6 @@ python weatherapp.py
 	•	If there’s a connection issue:
 ❌ “Error retrieving data. Check your connection.”
 
-
-📸 Screenshots
-
-Here’s how the Weather Forecast App looks in action:
-<img width="1510" alt="Screenshot2" src="https://github.com/user-attachments/assets/9bf34023-7efb-4e0d-8b28-738420084334" />
 
 📝 Notes
 	•	The app fetches real-time weather for a single city at a time.
